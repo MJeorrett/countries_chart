@@ -1,13 +1,39 @@
 var countryArray;
+var index = 0;
+var lastTenButton;
+var nextTenButton;
 
 var getCoutriesToDisplay = function() {
-  return countryArray.slice( 0, 10 );
+  return countryArray.slice( index * 10, index * 10 + 10 );
 };
+
+var lastTenClicked = function() {
+  index--;
+  refreshMap();
+  updateButtons();
+}
+
+var nextTenClicked = function() {
+  index++;
+  refreshMap();
+  updateButtons();
+}
+
+var updateButtons = function() {
+  console.log("index > 0:", index > 0 );
+  console.log(lastTenButton);
+  lastTenButton.disabled = !(index > 0);
+  nextTenButton.disabled = !(index < 24);
+}
+
+var refreshMap = function() {
+  var container = document.querySelector( '#chart-container' );
+  var chart = new ChartHelper( "", getCoutriesToDisplay() , "population", "name", container );
+}
 
 window.onload = function() {
   var countries = xmlhttpHelper.getRequest( "https://restcountries.eu/rest/v1/all", function( countries ) {
     console.log( "received countries", countries );
-
 
     countryArray = countries.map(function(country){
       return {name: country.name, population: country.population, code: country.alpha2Code};
@@ -23,8 +49,12 @@ window.onload = function() {
 
     console.log(countryArray);
 
-    var container = document.querySelector( '#chart-container' );
-    var chart = new ChartHelper( "", getCoutriesToDisplay() , "population", "name", container );
+    refreshMap();
 
+    lastTenButton = document.querySelector( '#last-ten' );
+    lastTenButton.onclick = lastTenClicked;
+
+    nextTenButton = document.querySelector( '#next-ten' );
+    nextTenButton.onclick = nextTenClicked;
   });
 };
