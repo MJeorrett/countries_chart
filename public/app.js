@@ -7,6 +7,14 @@ window.onload = function() {
       return {name: country.name, population: country.population, code: country.alpha2Code};
     });
 
+    countryArray.sort( function( countryA, countryB ) {
+      var populationA = countryA.population;
+      var populationB = countryB.population;
+      if ( populationA > populationB ) return -1;
+      if ( populationA < populationB ) return 1;
+      return 0;
+    });
+
     console.log(countryArray);
 
     var container = document.querySelector( '#chart-container' );
