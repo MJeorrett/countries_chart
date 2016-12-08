@@ -2,9 +2,10 @@ var countryArray;
 var index = 0;
 var lastTenButton;
 var nextTenButton;
+var noToDisplay = 18;
 
 var getCoutriesToDisplay = function() {
-  return countryArray.slice( index * 10, index * 10 + 10 );
+  return countryArray.slice( index * noToDisplay, (index + 1) * noToDisplay );
 };
 
 var lastTenClicked = function() {
@@ -23,7 +24,7 @@ var updateButtons = function() {
   console.log("index > 0:", index > 0 );
   console.log(lastTenButton);
   lastTenButton.disabled = !(index > 0);
-  nextTenButton.disabled = !(index < 24);
+  nextTenButton.disabled = !(index < ( 250 / noToDisplay ) - 1 );
 }
 
 var refreshMap = function() {
