@@ -4,11 +4,18 @@ body {
 
 h1 {
   text-align: center;
+  color: beige;
+  font-size: 50px;
 }
 
 #main-container {
   display: flex;
   justify-content: center;
+}
+
+#chart-container {
+  padding: 20px;
+  background-color: white;
 }
 
 #last-ten {
@@ -17,4 +24,36 @@ h1 {
 
 #next-ten {
   margin-left: 20px;
+}
+
+button {
+  background-color: beige;
+  color: dodgerblue;
+  border: none;
+  font-size: 20px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:disabled {
+  background-color: lightgrey;
+  color: grey;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background-color: lightgrey;
+  border: none;
+  padding: 8px;
+}
+
+button:active {
+  background-color: white;
+}
+
+button:hover {
+  background-color: white;
+  border: 2px solid dodgerblue;
+  padding: 6px;
 }
