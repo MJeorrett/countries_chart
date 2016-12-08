@@ -9,7 +9,8 @@ window.onload = function() {
 
     console.log(countryArray);
 
-
+    var container = document.querySelector( '#chart-container' );
+    var chart = new ChartHelper( "", countryArray, "population", "name", container );
 
   });
 };
